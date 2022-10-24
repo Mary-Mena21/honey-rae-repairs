@@ -1,11 +1,3 @@
-// export const TicketList = () => {
-//     return <h2>List of Tickets</h2>
-// }
-
-/* https://www.notion.so/learningthings/Honey-Rae-Repairs-Part-3-c9e4a927d5e24b61aa3f470c4ce2d6ae  */
-//import = statement
-//react-router-dom = router
-//navigate = future = function
 
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
@@ -18,11 +10,23 @@ export const TicketList = () => {
     const [openOnly, updateOpenOnly] = useState(false);
     const navigate = useNavigate()
 
-    const localHoneyUser = localStorage.getItem("honey_user");
+    const localHoneyUser = localStorage.getItem("honey_user");//????????????????????????
     //console.log(localHoneyUser);
     //console.log(localStorage);
-    const honeyUserObject = JSON.parse(localHoneyUser); //honeyUserObject
+    const honeyUserObject = JSON.parse(localHoneyUser);
+    //honeyUserObject
     //console.log(honeyUserObject)
+
+    useEffect(() => {
+      first
+    
+      return () => {
+        second
+      }
+    }, [third])
+    
+
+    
 
     useEffect(() => {
         if (emergency) {
@@ -128,3 +132,12 @@ export const TicketList = () => {
             //         ? <button onClick={() => { setEmergency(true) }}> Emergency Only </button>
             //         :""
             // }
+
+            // export const TicketList = () => {
+//     return <h2>List of Tickets</h2>
+// }
+
+/* https://www.notion.so/learningthings/Honey-Rae-Repairs-Part-3-c9e4a927d5e24b61aa3f470c4ce2d6ae  */
+//import = statement
+//react-router-dom = router
+//navigate = future = function

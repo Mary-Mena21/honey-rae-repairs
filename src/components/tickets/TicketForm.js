@@ -51,6 +51,24 @@ export const TicketForm = () => {
             });
     };
 
+
+    // const fetchOptions = {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(userServiceRequest),
+    // };
+    // const mainContainer = document.querySelector("#container");
+    // const response = await fetch(`${API}/requests`, fetchOptions);
+    // const responseJson = await response.json();
+    // mainContainer.dispatchEvent(new CustomEvent("stateChanged"));
+    // return responseJson;
+
+
+
+
+
     return (
         <form className="ticketForm">
             <h2 className="ticketForm__title">New Service Ticket</h2>

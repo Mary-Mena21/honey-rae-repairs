@@ -6,10 +6,12 @@
 // }
 
 import { Outlet, Route, Routes } from "react-router-dom";
+import { TicketContainer } from "../tickets/TicketContainer";
 import { TicketForm } from "../tickets/TicketForm";
-import { TicketList } from "../tickets/TicketList";
-import { Hello } from "../MMM/Mariana.js";
-
+// import { TicketList } from "../tickets/TicketList";
+// import { TicketSearch } from "../tickets/TicketSearch";
+//import { Hello } from "../MMM/Mariana.js";
+//../   ../
 export const ApplicationViews = () => {
     return (
         <Routes>
@@ -17,20 +19,16 @@ export const ApplicationViews = () => {
                 path="/"
                 element={
                     <>
-                        <h1>Honey AAA Rae Repair Shop</h1>
+                        <h1>Honey Rae Repair Shop</h1>
                         <div>
                             Your one-stop-shop to get all your electronics fixed
-			    {<Hello />}
                         </div>
-
                         <Outlet />
                     </>
                 }
             >
-                <Route path="tickets" element={<TicketList />} />
+                <Route path="tickets" element={<TicketContainer />} />
                 <Route path="ticket/create" element={<TicketForm />} />
-                <Route path="example" element={<h1> example </h1>} />
-                
             </Route>
         </Routes>
     );
@@ -41,3 +39,8 @@ export const ApplicationViews = () => {
 //<Outlet />
 
 //<Route path="tickets" element={<Hello />} />
+/* <Route path="example" element={<h1> example </h1>} />
+    <Route path="example" element={<Hello />} /> 
+    <Route path="example/create" element={<Hello />} />*/
+// <h1>Honey AAA Rae Repair Shop</h1>
+//                        {<Hello />}
