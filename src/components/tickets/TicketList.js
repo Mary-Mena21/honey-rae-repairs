@@ -3,31 +3,33 @@ import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import "./Tickets.css";
 
-export const TicketList = () => {
+export const TicketList = ({searchTermState}) => {
     const [tickets, setTickets] = useState([]);
     const [filteredTickets, setFiltered] = useState([]);
     const [emergency, setEmergency] = useState(false);
     const [openOnly, updateOpenOnly] = useState(false);
     const navigate = useNavigate()
 
-    const localHoneyUser = localStorage.getItem("honey_user");//????????????????????????
+    const localHoneyUser = localStorage.getItem("honey_user");
+    const honeyUserObject = JSON.parse(localHoneyUser);
     //console.log(localHoneyUser);
     //console.log(localStorage);
-    const honeyUserObject = JSON.parse(localHoneyUser);
-    //honeyUserObject
     //console.log(honeyUserObject)
 
-    useEffect(() => {
-      first
+    /* ----Search Term---- */
+    useEffect(
+        () => {
+        //console.log("MMM"+ searchTermState)
+            const searchedTickets = tickets.filter(ticket => {
+                //return ticket.description.toLowerCase().startsWith(searchTermState) 
+                return ticket.description.toLowerCase().includes(searchTermState.toLowerCase()) 
+            })
+            setFiltered(searchedTickets)
+        },
+        [searchTermState]
+    )
     
-      return () => {
-        second
-      }
-    }, [third])
-    
-
-    
-
+/* ----Emergency Tickets---- */
     useEffect(() => {
         if (emergency) {
             const emergencyTickets = tickets.filter(
@@ -41,8 +43,8 @@ export const TicketList = () => {
 
     useEffect(
         () => {
-            //console.log("Initial state of tickets", tickets) // View the initial state of tickets
-
+            //console.log("Initial state of tickets", tickets) 
+            // View the initial state of tickets
             //Alternative syntax with .then method
             // fetch(`http://localhost:8088/serviceTickets`)
             //     .then((response) => response.json())
@@ -110,7 +112,8 @@ export const TicketList = () => {
                 {filteredTickets.map((ticket) => {
                     return (
                         <section key={ticket.id} className="ticket">
-                            <header>{ticket.description}</header>
+                            <header>TICKET: {ticket.description}</header>
+                            <header>E COMPLETED: {ticket.dateCompleted}</header>
                             <footer>
                                 Emergency: {ticket.emergency ? "❗" : "No"}
                             </footer>
