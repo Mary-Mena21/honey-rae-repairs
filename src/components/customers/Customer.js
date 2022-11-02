@@ -17,3 +17,4 @@ export const Customer = ({ id, fullName, email, address, phoneNumber }) => {
         <div>PhoneNumber: {phoneNumber}</div>
         <div>{id}</div>
 */
+  
