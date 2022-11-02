@@ -41,6 +41,12 @@
       "fullName": "Jeremy Bakker",
       "isStaff": true,
       "id": 7
+    },
+    {
+      "email": "MARIANA1MENA1@GMAIL.COM",
+      "fullName": "MARIAN MENA",
+      "isStaff": true,
+      "id": 8
     }
   ],
   "customers": [
@@ -67,7 +73,7 @@
     {
       "id": 1,
       "specialty": "PC Repair",
-      "rate": 72.47,
+      "rate": 30,
       "userId": 4
     },
     {
@@ -85,7 +91,7 @@
     {
       "id": 4,
       "specialty": "PC Repair",
-      "rate": 25.40,
+      "rate": 25.4,
       "userId": 7
     }
   ],
@@ -117,79 +123,6 @@
       "description": "A deleniti est sed vel. Dolores aliquid enim vero. Quia eligendi vel voluptas. Nihil nihil quasi ullam officia doloremque amet non. Officia atque quae.",
       "emergency": false,
       "dateCompleted": ""
-    },
-    {
-      "id": 5,
-      "userId": 1,
-      "description": "Pariatur nihil animi eos doloremque laborum fugiat consequuntur iusto. Et tempore a enim.",
-      "emergency": true,
-      "dateCompleted": "Fri Apr 29 2022 21:24:29 GMT-0500 (Central Daylight Time)"
-    },
-    {
-      "userId": 3,
-      "description": "",
-      "emergency": false,
-      "dateCompleted": "",
-      "id": 6
-    },
-    {
-      "userId": 2,
-      "description": "vvv",
-      "emergency": false,
-      "dateCompleted": "",
-      "id": 7
-    },
-    {
-      "userId": 2,
-      "description": "",
-      "emergency": false,
-      "dateCompleted": "",
-      "id": 8
-    },
-    {
-      "userId": 2,
-      "description": "LKJH",
-      "emergency": true,
-      "dateCompleted": "",
-      "id": 9
-    },
-    {
-      "userId": 2,
-      "description": "MNBVGHJ",
-      "emergency": true,
-      "dateCompleted": "",
-      "id": 10
-    },
-    {
-      "userId": 2,
-      "description": "nnnnn",
-      "emergency": true,
-      "dateCompleted": "",
-      "id": 11
-    },
-    {
-      "userId": 1,
-      "description": "AAAAAA",
-      "emergency": true,
-      "dateCompleted": "",
-      "id": 12
-    }
-  ],
-  "employeeTickets": [
-    {
-      "id": 1,
-      "employeeId": 3,
-      "serviceTicketId": 1
-    },
-    {
-      "id": 2,
-      "employeeId": 2,
-      "serviceTicketId": 5
-    },
-    {
-      "id": 3,
-      "employeeId": 1,
-      "serviceTicketId": 4
     }
   ]
 }
