@@ -10,14 +10,15 @@ export const TicketForm = () => {
         description: "",
         emergency: false,
     });
+    /* ------------------------------ */
     /*
         TODO: Use the useNavigation() hook so you can redirect
         the user to the ticket list
     */
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const localHoneyUser = localStorage.getItem("honey_user");
     const honeyUserObject = JSON.parse(localHoneyUser);
-
+    /* ------------------------------ */
     const handleSaveButtonClick = (event) => {
         event.preventDefault();
         //console.log("You clicked the button!");
@@ -25,9 +26,9 @@ export const TicketForm = () => {
         /*
             "id": 1,
             "userId": 3,
-            "description": "Saepe ex sapiente deserunt et voluptas fugiat vero quasi. Ipsam est non ipsa. Occaecati rerum ipsa consequuntur. Ratione commodi unde sint non rerum. Sit quia et aut sunt.",
+            "description": "Test",
             "emergency": false,
-            "dateCompleted": "Fri Apr 29 2022 14:02:20 GMT-0500 (Central Daylight Time)" 
+            "dateCompleted": "22-11-03" 
             */
         const ticketToSendToAPI = {
             userId: honeyUserObject.id,
@@ -35,23 +36,28 @@ export const TicketForm = () => {
             emergency: ticket.emergency,
             dateCompleted: "",
         };
-
+    /* ------------------------------ */
         // TODO: Perform the fetch() to POST the object to the API
-
         return fetch(`http://localhost:8088/serviceTickets`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(ticketToSendToAPI)
+            body: JSON.stringify(ticketToSendToAPI),
         })
             .then((response) => response.json())
             .then(() => {
-                navigate("/tickets")
+                navigate("/tickets");
             });
     };
+    //here we are fetching the api to add (POST) new data to api
+    /* ------------------------------ */
 
 
+    
+    /* ------------------------------ */
+    /* --------------TEST------------ */
+    /* ------------------------------ */
     // const fetchOptions = {
     //     method: "POST",
     //     headers: {
@@ -64,7 +70,33 @@ export const TicketForm = () => {
     // const responseJson = await response.json();
     // mainContainer.dispatchEvent(new CustomEvent("stateChanged"));
     // return responseJson;
+    /* ------------------------------ */
+    
+    /* async */
+//     const ticketToSendToAPI =async (SendToAPI) => {
+//     const fetchOptions = {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(SendToAPI),
+//     };
+//     const response = await fetch(
+//         `http://localhost:8088/serviceTickets?_user`,
+//         fetchOptions
+//     );
+//     const responseJson = await response.json();
+//     return responseJson;
+// };
 
+//     /* ------------------------------ */
+//     const handleSaveButtonClick = (event) => {
+//         ticketToSendToAPI(ticket);
+//         navigate("/tickets");
+//     };
+    /* ------------------------------ */
+    /* ------------------------------ */
+    /* ------------------------------ */
 
 
 

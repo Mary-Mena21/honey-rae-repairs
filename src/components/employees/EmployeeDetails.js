@@ -43,3 +43,9 @@ export const EmployeeDetails = () => {
 we started with a list of employees that only shows their name and email and I wanted a way to show all of the details when you click on the user name so I changed these name parts of this component into a [React Router Link] which is going to Route the URL in the browser to employee / some number. 
 What do I want to be displayed when it is employees / some number and that's what employees is for so when the route is that display the EmployeeDetails then in EmployeeDetails use the Params hook to grab that number out of the URL then if you need to go get the data for the resource that you're trying to look at and then just update your JSX to render all of the properties that are on that object
 */
+
+/* 
+                <Route path="tickets/:ticketId_M" element={<TicketList />} />
+                <Route path="ticket/create" element={<TicketForm />} />
+                <Route path="profile" element={<Profile />} />
+*/
