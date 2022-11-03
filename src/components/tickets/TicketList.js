@@ -1,14 +1,14 @@
-
 import { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import { Ticket } from "./Ticket";
 import "./Tickets.css";
 
-export const TicketList = ({searchTermState}) => {
+export const TicketList = ({ searchTermState }) => {
     const [tickets, setTickets] = useState([]);
     const [filteredTickets, setFiltered] = useState([]);
     const [emergency, setEmergency] = useState(false);
     const [openOnly, updateOpenOnly] = useState(false);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const localHoneyUser = localStorage.getItem("honey_user");
     const honeyUserObject = JSON.parse(localHoneyUser);
@@ -17,19 +17,18 @@ export const TicketList = ({searchTermState}) => {
     //console.log(honeyUserObject)
 
     /* ----Search Term---- */
-    useEffect(
-        () => {
+    useEffect(() => {
         //console.log("MMM"+ searchTermState)
-            const searchedTickets = tickets.filter(ticket => {
-                //return ticket.description.toLowerCase().startsWith(searchTermState) 
-                return ticket.description.toLowerCase().includes(searchTermState.toLowerCase()) 
-            })
-            setFiltered(searchedTickets)
-        },
-        [searchTermState]
-    )
-    
-/* ----Emergency Tickets---- */
+        const searchedTickets = tickets.filter((ticket) => {
+            //return ticket.description.toLowerCase().startsWith(searchTermState)
+            return ticket.description
+                .toLowerCase()
+                .includes(searchTermState.toLowerCase());
+        });
+        setFiltered(searchedTickets);
+    }, [searchTermState]);
+
+    /* ----Emergency Tickets---- */
     useEffect(() => {
         if (emergency) {
             const emergencyTickets = tickets.filter(
@@ -43,7 +42,7 @@ export const TicketList = ({searchTermState}) => {
 
     useEffect(
         () => {
-            //console.log("Initial state of tickets", tickets) 
+            //console.log("Initial state of tickets", tickets)
             // View the initial state of tickets
             //Alternative syntax with .then method
             // fetch(`http://localhost:8088/serviceTickets`)
@@ -51,14 +50,16 @@ export const TicketList = ({searchTermState}) => {
             //     .then((ticketArray) => {
             //         setTickets(ticketArray);
             //     });
-            
-            //Alternative syntax with async/await 
+
+            //Alternative syntax with async/await
             const fetchData = async () => {
-                const response = await fetch(`http://localhost:8088/serviceTickets`)
-                const ticketArray = await response.json()
-                setTickets(ticketArray)
-            }
-            fetchData()
+                const response = await fetch(
+                    `http://localhost:8088/serviceTickets`
+                );
+                const ticketArray = await response.json();
+                setTickets(ticketArray);
+            };
+            fetchData();
         },
         [] // When this array is empty, you are observing initial component state
     );
@@ -77,50 +78,84 @@ export const TicketList = ({searchTermState}) => {
         }
     }, [tickets]);
 
-    useEffect(() => { 
-        if(openOnly){ const openTicketArray = tickets.filter(ticket => {
-            return ticket.userId === honeyUserObject.id && ticket.dateCompleted ==="" 
-        })
+    useEffect(() => {
+        if (openOnly) {
+            const openTicketArray = tickets.filter((ticket) => {
+                return (
+                    ticket.userId === honeyUserObject.id &&
+                    ticket.dateCompleted === ""
+                );
+            });
             setFiltered(openTicketArray);
         } else {
             const myTickets = tickets.filter(
-                (ticket) => ticket.userId === honeyUserObject.id)
+                (ticket) => ticket.userId === honeyUserObject.id
+            );
             setFiltered(myTickets);
         }
-    },[openOnly]);
+    }, [openOnly]);
 
     return (
         <>
-            {
-                honeyUserObject.staff
-            
-                    ?
-                    <>
-                        <button onClick={() => { setEmergency(true) }}>Emergency Only</button>
-                        <button onClick={() => { setEmergency(false) }}>Show All</button>
-                    </>
-                    :
-                    <>
-                        <button onClick={() => navigate("/ticket/create")}>Create Ticket</button>
-                        <button onClick={() => updateOpenOnly(true)}>Open Ticket</button>
-                        <button onClick={() => updateOpenOnly(false)}>All My Ticket</button>
-                    </>
-            }
+            {honeyUserObject.staff ? (
+                <>
+                    <button
+                        onClick={() => {
+                            setEmergency(true);
+                        }}
+                    >
+                        Emergency Only
+                    </button>
+                    <button
+                        onClick={() => {
+                            setEmergency(false);
+                        }}
+                    >
+                        Show All
+                    </button>
+                </>
+            ) : (
+                <>
+                    <button onClick={() => navigate("/ticket/create")}>
+                        Create Ticket
+                    </button>
+                    <button onClick={() => updateOpenOnly(true)}>
+                        Open Ticket
+                    </button>
+                    <button onClick={() => updateOpenOnly(false)}>
+                        All My Ticket
+                    </button>
+                </>
+            )}
 
             <h2>List of Tickets</h2>
             <article className="tickets">
                 {filteredTickets.map((ticket) => {
                     return (
-                        <section key={ticket.id} className="ticket">
-                            <header>TICKET: {ticket.description}</header>
-                            <header>E COMPLETED: {ticket.dateCompleted}</header>
-                            <footer>
-                                Emergency: {ticket.emergency ? "❗" : "No"}
-                            </footer>
-                        </section>
+                        <Ticket
+                            key={ticket.id}
+                            id={ticket. id}
+                            description={ticket.description}
+                            dateCompleted={ticket.dateCompleted}
+                            emergency={ticket.emergency ? "❗" : "No"}
+                        />
                     );
                 })}
             </article>
+
+            {/*             // <article className="tickets">
+            //     {filteredTickets.map((ticket) => {
+            //         return (
+            //             <section key={ticket.id} className="ticket">
+            //                 <header>TICKET: {ticket.description}</header>
+            //                 <header>DATE COMPLETED: {ticket.dateCompleted}</header>
+            //                 <footer>
+            //                     Emergency: {ticket.emergency ? "❗" : "No"}
+            //                 </footer>
+            //             </section>
+            //         );
+            //     })}
+            // </article> */}
         </>
     );
 };
@@ -129,14 +164,14 @@ export const TicketList = ({searchTermState}) => {
 //<hr></hr>
 //<></> = react fragment
 
-            // {
-            //     honeyUserObject.staff
-            
-            //         ? <button onClick={() => { setEmergency(true) }}> Emergency Only </button>
-            //         :""
-            // }
+// {
+//     honeyUserObject.staff
 
-            // export const TicketList = () => {
+//         ? <button onClick={() => { setEmergency(true) }}> Emergency Only </button>
+//         :""
+// }
+
+// export const TicketList = () => {
 //     return <h2>List of Tickets</h2>
 // }
 
@@ -144,3 +179,11 @@ export const TicketList = ({searchTermState}) => {
 //import = statement
 //react-router-dom = router
 //navigate = future = function
+
+// <section key={ticket.id} className="ticket">
+// <header>TICKET: {ticket.description}</header>
+// <header>E COMPLETED: {ticket.dateCompleted}</header>
+// <footer>
+//     Emergency: {ticket.emergency ? "❗" : "No"}
+// </footer>
+// </section>
