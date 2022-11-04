@@ -20,7 +20,9 @@ export const TicketEdit = ({}) => {
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch(
-                `http://localhost:8088/serviceTickets?userId=${honeyUserObject.id}  `
+                `http://localhost:8088/serviceTickets?_expand=user&userId=${honeyUserObject.id}  `
+                //`http://localhost:8088/serviceTickets?_expand=user&userId=${honeyUserObject.id}  `
+                //`http://localhost:8088/serviceTickets?id=${honeyUserObject.id}`!NotWorking!
             );
             const data = await response.json();
             updateEditTicket(data[0]); //Try to make new Ticket and update it? ????????????????

@@ -5,6 +5,7 @@ import "./Tickets.css";
 
 export const TicketList = ({ searchTermState }) => {
     const [tickets, setTickets] = useState([]);
+    const [employees, setEmployees] = useState([]);
     const [filteredTickets, setFiltered] = useState([]);
     const [emergency, setEmergency] = useState(false);
     const [openOnly, updateOpenOnly] = useState(false);
@@ -14,7 +15,7 @@ export const TicketList = ({ searchTermState }) => {
     const honeyUserObject = JSON.parse(localHoneyUser);
     //console.log(localHoneyUser);
     //console.log(localStorage);
-    //console.log(honeyUserObject)
+    //console.log(honeyUserObject)//{id: 7, staff: true}
 
     /* ----Search Term---- */
     useEffect(() => {
@@ -40,8 +41,20 @@ export const TicketList = ({ searchTermState }) => {
         }
     }, [emergency]);
 
+    const getAllTickets = () => {
+        const fetchData = async () => {
+            const response = await fetch(
+                `http://localhost:8088/serviceTickets?_embed=employeeTickets`
+            );
+            const ticketArray = await response.json();
+            setTickets(ticketArray);
+        };
+        fetchData();
+    }
+
     useEffect(
         () => {
+            getAllTickets()
             //console.log("Initial state of tickets", tickets)
             // View the initial state of tickets
             //Alternative syntax with .then method
@@ -50,16 +63,20 @@ export const TicketList = ({ searchTermState }) => {
             //     .then((ticketArray) => {
             //         setTickets(ticketArray);
             //     });
-
+            /* ------------------------------------------ */
             //Alternative syntax with async/await
-            const fetchData = async () => {
+            /* fetch Ticket */
+
+            /* ------------------------------------------ */
+            /* fetch employee */
+            const fetchData_2 = async () => {
                 const response = await fetch(
-                    `http://localhost:8088/serviceTickets`
+                    `http://localhost:8088/employees?_expand=user`
                 );
-                const ticketArray = await response.json();
-                setTickets(ticketArray);
+                const employeeArray = await response.json();
+                setEmployees(employeeArray);
             };
-            fetchData();
+            fetchData_2();
         },
         [] // When this array is empty, you are observing initial component state
     );
@@ -127,23 +144,36 @@ export const TicketList = ({ searchTermState }) => {
                     </button>
                 </>
             )}
-
+            {/* -----------------PART1----
+        ----here we are passing props to the component------ */}
             <h2>List of Tickets</h2>
+            <article className="tickets">
+                {filteredTickets.map((ticket) => (
+                    <Ticket key={`ticket--${ticket.id}`}
+                        currentUser={honeyUserObject}
+                        ticketObject={ticket}
+                        employees={employees}
+                        getAllTickets={getAllTickets}
+                    />
+                ))}
+            </article>
+            {/* -----------------PART2-------------------- */}
+            {/*             <h2>List of Tickets</h2>
             <article className="tickets">
                 {filteredTickets.map((ticket) => {
                     return (
                         <Ticket
                             key={ticket.id}
-                            id={ticket. id}
+                            id={ticket.id}
                             description={ticket.description}
                             dateCompleted={ticket.dateCompleted}
                             emergency={ticket.emergency ? "❗" : "No"}
                         />
                     );
                 })}
-            </article>
-
-            {/*             // <article className="tickets">
+            </article> */}
+            {/* -----------------PART3-------------------- */}
+            {/*     // <article className="tickets">
             //     {filteredTickets.map((ticket) => {
             //         return (
             //             <section key={ticket.id} className="ticket">
