@@ -7,6 +7,7 @@ export const EmployeeList = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            /* fetch Ticket */
             const response = await fetch(
                 `http://localhost:8088/employees?_expand=user&_embed=employeeTickets`
                 //`http://localhost:8088/users?isStaff=true`
